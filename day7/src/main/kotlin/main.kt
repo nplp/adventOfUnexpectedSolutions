@@ -3,7 +3,7 @@ import java.io.InputStream
 
 fun main(args: Array<String>) {
 
-    val inputStream: InputStream = File("input2").inputStream()
+    val inputStream: InputStream = File("input").inputStream()
     val lineList = mutableListOf<String>()
     inputStream.bufferedReader().useLines { lines -> lines.forEach { lineList.add(it) } }
 
@@ -83,6 +83,7 @@ class Node(
             children.forEach { child ->
                 nodeList.forEach {
                     if (it.id == child.id) {
+                        it.visited = false
                         val result = it.visit(nodeList, resultList)
                         if (result == true) {
                             canHoldShinyGold = true
@@ -106,6 +107,7 @@ class Node(
             amountList.add(multiple)
             nodeList.forEach {
                 if(it.id == child.id) {
+                    it.visited = false
                     it.visitForGold(nodeList,amountList,multiple)
                 }
             }
